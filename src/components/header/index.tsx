@@ -1,16 +1,14 @@
 import Link from "next/link";
 import Logo from "/public/assets/vector/logo.svg";
-import { useUserGetQuery } from "@/services/authService";
+import { selectGetMe, useUserGetQuery } from "@/services/authService";
 import { Button } from "../UI/button";
 import { Loader } from "../loader";
+import { useAppSelector } from "@/store/hooks";
 
 export const Header = () => {
 
-    const { data: profile, isLoading } = useUserGetQuery(undefined, {
-        refetchOnFocus: true,
-        refetchOnMountOrArgChange: true,
-        refetchOnReconnect: true
-    })
+    const { data: profile, isLoading } = useAppSelector((state) => selectGetMe(state))
+
     return (
         <header className="flex justify-between items-center">
             <Link href="/main">

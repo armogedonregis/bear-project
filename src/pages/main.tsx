@@ -1,7 +1,8 @@
 import { Button } from "@/components/UI/button";
 import { MainAgentCard, MainAgentDangerCard } from "@/components/screens/mainScreen/mainAgentCard";
 import { MainClientCard } from "@/components/screens/mainScreen/mainClientCard";
-import { selectGetMe } from "@/services/authService";
+import { selectGetMe, useUserGetQuery } from "@/services/authService";
+import { bearplusApi } from "@/services/bearplusApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCredentialsNull } from "@/store/slice/authSlice";
 import { authLogout, isAuth } from "@/utils/isAuth";
@@ -14,7 +15,11 @@ const Main = () => {
     const { t } = useTranslation('locale')
     const dispatch = useAppDispatch()
 
-    const user = useAppSelector((state) => selectGetMe(state))
+    const { data: user, isLoading } = useUserGetQuery(undefined, {
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true,
+        refetchOnReconnect: true
+    })
 
     const handleLogout = () => {
         window.localStorage.setItem('token', '')
@@ -22,10 +27,11 @@ const Main = () => {
             position: 'bottom-center'
         });
         dispatch(setCredentialsNull())
+        dispatch(bearplusApi.util.resetApiState())
         authLogout()
     }
 
-    const role = (user && user?.data?.typeUser !== 'Agent')
+    const role = user?.typeUser !== 'Agent';
 
     const [changePage, setChangePage] = useState<number>(0);
 
@@ -33,7 +39,7 @@ const Main = () => {
         <section className="mt-6 lg:mt-20">
             <div className="flex lg:flex-row flex-col gap-5 lg:gap-12">
                 <div className="flex flex-col gap-5 lg:w-[300px] lg:h-[600px]">
-                    {role ?
+                    {user && role ?
                         <>
                         <Button href="/">Создать новую заявку</Button>
                         <Button active={changePage === 0} onClick={() => setChangePage(0)}>Мои заявки</Button>
@@ -50,9 +56,9 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="lg:w-1/2">
-                    {user.isLoading ?
+                    {isLoading ?
                         null :
-                        role ?
+                        user && role ?
                         <>
                             {changePage === 0 && <MainClientCard />}
                             {changePage === 1 && <MainClientCard />}

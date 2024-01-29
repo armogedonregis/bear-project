@@ -49,6 +49,7 @@ const authService = bearplusApi.injectEndpoints({
             query: () => ({
                 url: '/users',
             }),
+            providesTags: [{ type: 'Users', id: 'LIST' }],
             transformResponse: (res: { data: IUser }) => res.data
         }),
     }),
