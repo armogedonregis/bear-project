@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
-import config from './next-i18next.config.mjs';
-
-const i18n = config.i18n;
+import i18n from './next-i18next.config.js';
 
 const nextConfig = {
   reactStrictMode: true,
-  i18n,
+  i18n: i18n.i18n,
   env: {
     API_KEY: process.env.API_KEY,
     DADATA_API_KEY: process.env.DADATA_API_KEY

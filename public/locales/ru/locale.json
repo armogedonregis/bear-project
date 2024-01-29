@@ -1,4 +1,50 @@
 {
-    "home": "Мои заявки"
-   
+    "main_page": {
+        "settings_btn": "Настройки",
+        "logout": "Выход",
+        "client": {
+            "create_btn": "Создать новую заявку",
+            "my_btn": "Мои заявки"
+        },
+        "agent": {
+            "all_request_btn": "Все заявки",
+            "request_work": "Заявки в работе"
+        },
+        "agent_card": {
+            "pointOfDeparture": "Пункт отправления: ",
+            "pointOfArrival": "Пункт прибытия: ",
+            "containerType": "Тип контейнера: ",
+            "characteristicsOfTheCargo": "Характеристика Груза: ",
+            "phoneNumber": "Телефон: ",
+            "countResponses": "Количество откликов: ",
+            "createdAt": "Создан: ",
+            "request_respond": "Отклик на ",
+            "cancel_request_respond": "Отказаться от выполнения к заявке ",
+            "request_respond_id": "Заявка ",
+            "request_respond_respond": "Отклик",
+            "respond_answer": "Ответ: ",
+            "respond_agent": "Агент: ",
+            "respond_phonenumber": "Телефон: ",
+            "respond_respond_price": "Цена: ",
+            "respond_respond_agent": "Отклик: ",
+            "respond_respond_created": "Оставлен: ",
+            "respond_not_found": "Нет возможности посмотреть отклики"
+        },
+        "agent_btn": {
+            "getAllApp_btn_chose": "Выбрать",
+            "request_cancel": "Отменить",
+            "request_confirm": "Откликнуться",
+            "request_vision": "Просмотреть",
+            "come_back": "Вернуться назад",
+            "cancel_btn_cancel": "Отменить",
+            "cancel_btn_confirm": "Подтвердить",
+            "cancel_respond_agent": "Отказаться"
+        },
+        "agent_request": {
+            "confirm_request_success": "Вы оставили отклик",
+            "confirm_request_error": "Вы оставили отклик",
+            "confirm_success_request_respond": "Вы подтвердили отклик",
+            "confirm_error_request_respond": "При оставлении отклика что-то пошло не так"
+        }
+    }
 }

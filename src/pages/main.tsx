@@ -1,18 +1,20 @@
 import { Button } from "@/components/UI/button";
 import { MainAgentCard, MainAgentDangerCard } from "@/components/screens/mainScreen/mainAgentCard";
 import { MainClientCard } from "@/components/screens/mainScreen/mainClientCard";
-import { selectGetMe, useUserGetQuery } from "@/services/authService";
+import { useUserGetQuery } from "@/services/authService";
 import { bearplusApi } from "@/services/bearplusApi";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { setCredentialsNull } from "@/store/slice/authSlice";
 import { authLogout, isAuth } from "@/utils/isAuth";
 import { NextPageContext } from "next";
 import { useState } from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { toast } from "react-toastify";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
 
 const Main = () => {
-    const { t } = useTranslation('locale')
+    const { t, i18n } = useTranslation('locale')
     const dispatch = useAppDispatch()
 
     const { data: user, isLoading } = useUserGetQuery(undefined, {
@@ -41,18 +43,18 @@ const Main = () => {
                 <div className="flex flex-col gap-5 lg:w-[300px] lg:h-[600px]">
                     {user && role ?
                         <>
-                        <Button href="/">Создать новую заявку</Button>
-                        <Button active={changePage === 0} onClick={() => setChangePage(0)}>Мои заявки</Button>
+                        <Button href="/">{t('main_page.client.create_btn')}</Button>
+                        <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.client.my_btn')}</Button>
                         </>
                         :
                         <>
-                            <Button active={changePage === 0} onClick={() => setChangePage(0)}>Все новые заявки</Button>
-                            <Button active={changePage === 1} onClick={() => setChangePage(1)}>Заявки в работе</Button>
+                            <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.agent.all_request_btn')}</Button>
+                            <Button active={changePage === 1} onClick={() => setChangePage(1)}>{t('main_page.agent.request_work')}</Button>
                         </>
                     }
-                    <Button href="/settings/change-password">Настройки</Button>
+                    <Button href="/settings/change-password">{t('main_page.settings_btn')}</Button>
                     <div className="lg:mt-auto">
-                        <Button onClick={handleLogout} color="red">Выход</Button>
+                        <Button onClick={handleLogout} color="red">{t('main_page.logout')}</Button>
                     </div>
                 </div>
                 <div className="lg:w-1/2">
@@ -95,7 +97,10 @@ export const getServerSideProps = async (ctx: NextPageContext) => {
 
     return {
         props: {
-
+            ...(await serverSideTranslations(lang ?? 'ru', [
+                'common',
+                'locale'
+            ])),
         },
     }
 };
