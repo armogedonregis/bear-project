@@ -5,6 +5,7 @@ import { useModal } from "@/hooks/useModal";
 import { useApplicationGetAllClientQuery } from "@/services/calculationService";
 import { useRespondApproveStatusClientMutation, useRespondClientByApplicationIdQuery, useRespondClientByResponseIdQuery } from "@/services/requestService";
 import { IRespond } from "@/types/respond";
+import formatDateDistanceToNow from "@/utils/formatDateDistanceToNow";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -33,6 +34,7 @@ export const MainClientCard = () => {
                                     <TextCard first="Характеристика Груза: ">{item.characteristicsOfTheCargo}</TextCard>
                                     <TextCard first="Телефон: ">{item.phoneNumber}</TextCard>
                                     <TextCard first="Количество откликов: ">{item.countResponses}</TextCard>
+                                    <TextCard first="Создан: ">{item.createdAt && formatDateDistanceToNow(item.createdAt)}</TextCard>
                                 </div>
                                 <div className="w-[350px] mt-5">
                                     <Button onClick={() => setChoiseReq(item._id)}>Выбрать</Button>
@@ -82,6 +84,8 @@ export const MainClientIdCard = ({ id, choiseAgent }: CardIdProps) => {
                             <TextCard first="Телефон: ">{item.phoneNumber}</TextCard>
                             <TextCard first="Цена: ">{item.price}</TextCard>
                             <TextCard first="Отклик: ">{item.description}</TextCard>
+                            <TextCard first="Оставлен: ">{item.createdAt && formatDateDistanceToNow(item.createdAt)}</TextCard>
+
                             <div className="mt-10">
                                 <Button onClick={() => choiseAgent(item)}>Выбрать агента</Button>
                             </div>

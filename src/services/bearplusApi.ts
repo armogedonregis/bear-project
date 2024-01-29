@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 export const bearplusApi = createApi({
   reducerPath: 'bearplus',
   baseQuery: baseQuery,
-  tagTypes: ["Admin", "Users"],
+  tagTypes: ["Admin", "Users", "Requests"],
   endpoints: (build) => ({
 
   }),

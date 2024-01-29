@@ -1,6 +1,7 @@
 import { ICreateRespondApplication } from "@/utils/yupSchema";
 import { bearplusApi } from "./bearplusApi";
 import { IRespond } from "@/types/respond";
+import { IApplicationDanger } from "@/types/application";
 
 const requestService = bearplusApi.injectEndpoints({
     endpoints: (build) => ({
@@ -11,6 +12,7 @@ const requestService = bearplusApi.injectEndpoints({
                 url: `/responds/create/${id}`,
                 body: data
             }),
+            invalidatesTags: [{ type: 'Requests', id: 'LIST' }],
         }),
         // Get Responds to Applications For Client By Application ID
         respondClientByApplicationId: build.query<IRespond[], string>({
@@ -49,7 +51,7 @@ const requestService = bearplusApi.injectEndpoints({
             }),
         }),
         // Change And Approve Respond Status For Client And Agent
-        respondApproveStatusClient: build.mutation<IRespond, {applicationId: string, responseId: string}>({
+        respondApproveStatusClient: build.mutation<IApplicationDanger, {applicationId: string, responseId: string}>({
             query: ({ applicationId, responseId }) => ({
                 method: 'POST',
                 url: `/responds/client/approve/${applicationId}/response/${responseId}`,
@@ -63,14 +65,14 @@ const requestService = bearplusApi.injectEndpoints({
             }),
         }),
         // Change Or Approve Respond Status For Agent And Client Step Cancel
-        respondApproveStatusClientCancel: build.mutation<IRespond, {applicationId: string, responseId: string}>({
+        respondApproveStatusClientCancel: build.mutation<IApplicationDanger, {applicationId: string, responseId: string}>({
             query: ({ applicationId, responseId }) => ({
                 method: 'POST',
                 url: `/responds/agent/approve-step-cancel/${applicationId}/response/${responseId}`,
             }),
         }),
         // Change And Approve Respond Status For Client And Agent Step Cancel
-        respondApproveStatusAgentCancel: build.mutation<IRespond, {applicationId: string, responseId: string}>({
+        respondApproveStatusAgentCancel: build.mutation<IApplicationDanger, {applicationId: string, responseId: string}>({
             query: ({ applicationId, responseId }) => ({
                 method: 'POST',
                 url: `/responds/client/approve-step-cancel/${applicationId}/response/${responseId}`,

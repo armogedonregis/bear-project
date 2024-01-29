@@ -30,6 +30,13 @@ const calculationService = bearplusApi.injectEndpoints({
             query: () => ({
                 url: '/applications/danger-requests',
             }),
+            providesTags: (result) =>
+                result
+                    ? [
+                        ...result.map(({ _id }) => ({ type: 'Requests' as const, _id })),
+                        { type: 'Requests', id: 'LIST' },
+                    ]
+                    : [{ type: 'Requests', id: 'LIST' }],
         }),
         // get application by id
         applicationGetById: build.query<IApplicationDanger, string>({

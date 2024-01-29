@@ -22,8 +22,8 @@ export type IApplicationDanger = {
     phoneNumber: string;
     countResponses: number;
     statusRequest: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     statusRequestForAgent: string;
     statusRequestForClient: string;
 }

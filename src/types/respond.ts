@@ -8,8 +8,8 @@ export type IRespond = {
     user: string;
     agent: string;
     application: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     startUpStatus: boolean;
     statusRequestForClient: string;
     statusRequestForAgent: string;
