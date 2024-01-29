@@ -1,50 +1,50 @@
 {
     "main_page": {
         "settings_btn": "Settings",
-        "logout": "Выход",
+        "logout": "Exit",
         "client": {
-            "create_btn": "Создать новую заявку",
-            "my_btn": "Мои заявки"
+            "create_btn": "Create a new request",
+            "my_btn": "My applications"
         },
         "agent": {
-            "all_request_btn": "Все заявки",
-            "request_work": "Заявки в работе"
+            "all_request_btn": "All applications",
+            "request_work": "Applications in progress"
         },
         "agent_card": {
-            "pointOfDeparture": "Пункт отправления: ",
-            "pointOfArrival": "Пункт прибытия: ",
-            "containerType": "Тип контейнера: ",
-            "characteristicsOfTheCargo": "Характеристика Груза: ",
-            "phoneNumber": "Телефон: ",
-            "countResponses": "Количество откликов: ",
-            "createdAt": "Создан: ",
-            "request_respond": "Отклик на ",
-            "cancel_request_respond": "Отказаться от выполнения к заявке ",
-            "request_respond_id": "Заявка ",
-            "request_respond_respond": "Отклик",
-            "respond_answer": "Ответ: ",
-            "respond_agent": "Агент: ",
-            "respond_phonenumber": "Телефон: ",
-            "respond_respond_price": "Цена: ",
-            "respond_respond_agent": "Отклик: ",
-            "respond_respond_created": "Оставлен: ",
-            "respond_not_found": "Нет возможности посмотреть отклики"
+            "pointOfDeparture": "Point of departure: ",
+            "pointOfArrival": "Arrival point: ",
+            "containerType": "Container type: ",
+            "characteristicsOfTheCargo": "Characteristics of the Cargo: ",
+            "phoneNumber": "Telephone: ",
+            "countResponses": "Number of responses: ",
+            "createdAt": "Created by: ",
+            "request_respond": "Response to ",
+            "cancel_request_respond": "Refuse to complete the application ",
+            "request_respond_id": "Application ",
+            "request_respond_respond": "Response",
+            "respond_answer": "Answer: ",
+            "respond_agent": "Agent: ",
+            "respond_phonenumber": "Telephone: ",
+            "respond_respond_price": "Price: ",
+            "respond_respond_agent": "Response: ",
+            "respond_respond_created": "Left: ",
+            "respond_not_found": "No way to see responses"
         },
         "agent_btn": {
-            "getAllApp_btn_chose": "Выбрать",
-            "request_cancel": "Отменить",
-            "request_confirm": "Откликнуться",
-            "request_vision": "Просмотреть",
-            "come_back": "Вернуться назад",
-            "cancel_btn_cancel": "Отменить",
-            "cancel_btn_confirm": "Подтвердить",
-            "cancel_respond_agent": "Отказаться"
+            "getAllApp_btn_chose": "Choose",
+            "request_cancel": "Cancel",
+            "request_confirm": "Reply",
+            "request_vision": "View",
+            "come_back": "Come back",
+            "cancel_btn_cancel": "Cancel",
+            "cancel_btn_confirm": "Confirm",
+            "cancel_respond_agent": "Refuse"
         },
         "agent_request": {
-            "confirm_request_success": "Вы оставили отклик",
-            "confirm_request_error": "Вы оставили отклик",
-            "confirm_success_request_respond": "Вы подтвердили отклик",
-            "confirm_error_request_respond": "При оставлении отклика что-то пошло не так"
+            "confirm_request_success": "You left a response",
+            "confirm_request_error": "You left a response",
+            "confirm_success_request_respond": "You have confirmed your response",
+            "confirm_error_request_respond": "Something went wrong while leaving a response"
         }
     }
 }
