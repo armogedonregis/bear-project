@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-  frontend:
+  bearplus:
     build:
       context: .
-    container_name: "frontend"
+    container_name: "bearplus"
     ports:
       - "6565:6565"
     env_file:
