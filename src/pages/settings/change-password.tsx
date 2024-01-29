@@ -3,8 +3,10 @@ import { Button } from "@/components/UI/button";
 import { FormConstructor } from "@/components/formConstructor/formConstructor";
 import { changePasswordProfileForm } from "@/forms/profileForm";
 import { useUserChangeProfilePasswordMutation } from "@/services/authService";
+import { isAuth } from "@/utils/isAuth";
 import { ChangePasswordSchema, IChangePassword } from "@/utils/yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { NextPageContext } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -53,3 +55,27 @@ const ChangePasswordProfile = () => {
 }
 
 export default ChangePasswordProfile;
+
+
+export const getServerSideProps = async (ctx: NextPageContext) => {
+
+    // Определяем локализацию
+    const lang = ctx.locale
+
+    const isAuthencate = await isAuth(ctx)
+
+    if (!isAuthencate) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: true,
+            },
+        }
+    }
+
+    return {
+        props: {
+
+        },
+    }
+};
