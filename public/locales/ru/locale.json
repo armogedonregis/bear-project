@@ -1,4 +1,58 @@
 {
+    "metategs": {
+        "home_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "main_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "login_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "change_password_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "profile_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "registration_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "reset_password_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "settings_change_password_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        },
+        "dashboard_admin_page": {
+            "title": "",
+            "keywords": "",
+            "description": ""
+        }
+    },
+    "header": {
+        "status": "Статус: ",
+        "admin": "Админ",
+        "agent": "Агент",
+        "client": "Клиент",
+        "btn_reg": "Регистрация/Вход"
+    },
     "main_page": {
         "settings_btn": "Настройки",
         "logout": "Выход",
@@ -8,7 +62,8 @@
         },
         "agent": {
             "all_request_btn": "Все заявки",
-            "request_work": "Заявки в работе"
+            "request_work": "Заявки в работе",
+            "request_respond_btn": "Мои отклики"
         },
         "agent_card": {
             "pointOfDeparture": "Пункт отправления: ",

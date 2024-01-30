@@ -4,8 +4,8 @@ import { FormConstructor } from "@/components/formConstructor/formConstructor";
 import { ModalComponent } from "@/components/modal";
 import { RespondAgentForm } from "@/forms/respondForm";
 import { useModal } from "@/hooks/useModal";
-import { useApplicationGetAllAgentQuery, useApplicationGetAllDangerQuery } from "@/services/calculationService";
-import { useRespondApproveStatusClientCancelMutation, useRespondNewCreateMutation, useRespondStartUpAgentByIdQuery } from "@/services/requestService";
+import { useApplicationGetAllAgentQuery, useApplicationGetAllDangerQuery, useApplicationGetAllRespondAgentQuery } from "@/services/calculationService";
+import { useRespondApproveStatusAgentClientSuccessMutation, useRespondApproveStatusClientCancelMutation, useRespondNewCreateMutation, useRespondStartUpAgentByIdQuery } from "@/services/requestService";
 import { IApplicationDanger } from "@/types/application";
 import { IRespond } from "@/types/respond";
 import formatDateDistanceToNow from "@/utils/formatDateDistanceToNow";
@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 
 export const MainAgentCard = () => {
     const { data: allAgentApplication } = useApplicationGetAllAgentQuery(undefined);
-    const { t, i18n } = useTranslation('locale')
+    const { t } = useTranslation('locale')
     return (
         <div className="flex flex-col gap-5 mt-10">
             {allAgentApplication && allAgentApplication.map(item => {
@@ -33,7 +33,7 @@ export const MainAgentCard = () => {
                             <TextCard first={t('main_page.agent_card.countResponses')}>{item.countResponses}</TextCard>
                             <TextCard first={t('main_page.agent_card.createdAt')}>{item.createdAt && formatDateDistanceToNow(item.createdAt)}</TextCard>
                         </div>
-                        <div className="w-[350px] mt-5">
+                        <div className="mt-5">
                             <Button>{t('main_page.agent_btn.getAllApp_btn_chose')}</Button>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ export const MainAgentDangerCard = () => {
     const { data: allAgentApplication } = useApplicationGetAllDangerQuery(undefined);
     const [createRequest] = useRespondNewCreateMutation();
 
-    const { t, i18n } = useTranslation('locale')
+    const { t } = useTranslation('locale')
 
     const { isOpen: isOpenConfirm, modalChoise: onChoiseConfirm, onCloseModal: onCloseConfirm, onOpenModal: onOpenModalConfirm } = useModal<IApplicationDanger>();
 
@@ -131,30 +131,56 @@ type MainAgentCardByIdProps = {
 export const MainAgentCardById = ({ id }: MainAgentCardByIdProps) => {
     const { data: cardId } = useRespondStartUpAgentByIdQuery(id)
 
-    const { t, i18n } = useTranslation('locale')
+    const { t } = useTranslation('locale')
 
     const { isOpen: isOpenCancel, modalChoise: modalChoseCancel, onCloseModal: onCloseCancel, onOpenModal: onOpenModalCancel } = useModal<IRespond>();
 
+    const { isOpen, onCloseModal, modalChoise, onOpenModal } = useModal<IRespond>();
+
     const [cancelRequest] = useRespondApproveStatusClientCancelMutation()
 
+    const [confirmRequest] = useRespondApproveStatusAgentClientSuccessMutation()
+
     const cancelSend = () => {
-        if(modalChoseCancel)
-        cancelRequest({ applicationId: id, responseId:  (modalChoseCancel.application as any)._id }).unwrap()
-            .then((res) => {
-                toast.success(t('main_page.agent_request.confirm_success_request_respond'), {
-                    position: 'bottom-right'
-                });
-                onCloseCancel()
-            }).catch(() => {
-                toast.error(t('main_page.agent_request.confirm_error_request_respond'), {
-                    position: 'bottom-right'
-                });
-                onCloseCancel()
-            })
+        if (modalChoseCancel)
+            cancelRequest({ applicationId: id, responseId: (modalChoseCancel.application as any)._id }).unwrap()
+                .then((res) => {
+                    toast.success(t('main_page.agent_request.confirm_success_request_respond'), {
+                        position: 'bottom-right'
+                    });
+                    onCloseCancel()
+                }).catch(() => {
+                    toast.error(t('main_page.agent_request.confirm_error_request_respond'), {
+                        position: 'bottom-right'
+                    });
+                    onCloseCancel()
+                })
+    }
+
+    const confirmSend = () => {
+        if (modalChoise)
+            confirmRequest({ applicationId: id, responseId: modalChoise._id }).unwrap()
+                .then((res) => {
+                    toast.success(t('main_page.agent_request.confirm_success_request_respond'), {
+                        position: 'bottom-right'
+                    });
+                    onCloseModal()
+                }).catch(() => {
+                    toast.error(t('main_page.agent_request.confirm_error_request_respond'), {
+                        position: 'bottom-right'
+                    });
+                    onCloseModal()
+                })
     }
 
     return (
         <>
+            <ModalComponent title={`Согласие на выполнение заказа ${id}`} isOpen={isOpen} closeModal={onCloseModal}>
+                <div className="flex w-full mt-5 items-center gap-5 justify-center">
+                    <Button color="gray56" onClick={onCloseModal}>{t('main_page.agent_btn.cancel_btn_cancel')}</Button>
+                    <Button onClick={confirmSend}>{t('main_page.agent_btn.cancel_btn_confirm')}</Button>
+                </div>
+            </ModalComponent>
 
             <ModalComponent title={`${t('main_page.agent_card.cancel_request_respond')} ${id}`} isOpen={isOpenCancel} closeModal={onCloseCancel}>
                 <div className="flex w-full mt-5 items-center gap-5 justify-center">
@@ -177,6 +203,12 @@ export const MainAgentCardById = ({ id }: MainAgentCardByIdProps) => {
                             <TextCard first={t('main_page.agent_card.respond_respond_agent')}>{item.description}</TextCard>
                             <TextCard first={t('main_page.agent_card.respond_respond_created')}>{item.createdAt && formatDateDistanceToNow(item.createdAt)}</TextCard>
 
+                            {item.startUpStatus === true &&
+                                <div className="mt-3">
+                                    <Button onClick={() => onOpenModal(item)} color="greenSm">Готов к сотрудничеству</Button>
+                                </div>
+                            }
+
                             <div className="mt-4">
                                 <Button onClick={() => onOpenModalCancel(item)} color="redSm">{t('main_page.agent_btn.cancel_respond_agent')}</Button>
                             </div>
@@ -189,5 +221,47 @@ export const MainAgentCardById = ({ id }: MainAgentCardByIdProps) => {
                 }
             </div>
         </>
+    );
+};
+
+// all request respond agent
+
+export const MainCardAgentRespond = () => {
+    const { data: cardsRespond } = useApplicationGetAllRespondAgentQuery(undefined, {
+        refetchOnReconnect: true,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
+    const { t } = useTranslation('locale')
+
+    const [choiseCard, setChoiseCard] = useState<string | undefined>(undefined);
+
+    return (
+        <div className="flex flex-col gap-5 mt-10">
+            {choiseCard === undefined ? cardsRespond && cardsRespond.map(item => {
+                return (
+                    <div key={item._id} className="border-1 rounded-15xl border-borderGray py-3 px-6 ">
+                        <div className="flex flex-col gap-3">
+                            <div className="bg-bgGray border-1 mt-5 px-5 py-4 border-borderGray rounded-15xl">
+                                {t('main_page.agent_card.request_respond_id')} {item.application._id}
+                            </div>
+                            <TextCard first={t('main_page.agent_card.pointOfDeparture')}>{item.application.pointOfDeparture}</TextCard>
+                            <TextCard first={t('main_page.agent_card.pointOfArrival')}>{item.application.pointOfArrival}</TextCard>
+                            <TextCard first={t('main_page.agent_card.containerType')}>{item.application.containerType}</TextCard>
+                            <TextCard first={t('main_page.agent_card.createdAt')}>{item.createdAt && formatDateDistanceToNow(item.application.createdAt)}</TextCard>
+                        </div>
+                        <div className="mt-5">
+                            <Button onClick={() => setChoiseCard(item.application._id)}>{t('main_page.agent_btn.getAllApp_btn_chose')}</Button>
+                        </div>
+                    </div>
+                )
+            })
+                :
+                <div>
+                    <Button onClick={() => setChoiseCard(undefined)}>{t('main_page.agent_btn.come_back')}</Button>
+                    <MainAgentCardById id={choiseCard} />
+                </div>
+            }
+        </div>
     );
 };

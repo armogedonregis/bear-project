@@ -11,13 +11,9 @@ export const Header = () => {
 
     const { data: profile, isLoading } = useAppSelector((state) => selectGetMe(state))
 
-    const { i18n } = useTranslation();
+    const { t } = useTranslation('locale');
 
     const router = useRouter()
-
-    const changeLanguage = (event: { target: { value: string | undefined; }; }) => {
-        i18n.changeLanguage(event.target.value);
-    };
 
     return (
         <header className="flex justify-between items-center">
@@ -46,14 +42,33 @@ export const Header = () => {
                             </Button>
                             <div className="mt-1">
                                 <Button color="gray">
-                                    Статус: {profile.roles.find(x => x === 'ADMIN') ? "Админ" : profile.roles.find(x => x === 'AGENT') ? "Агент" : "Клиент"}
+                                    {t('header.status')} {profile.roles.find(x => x === 'ADMIN') ? t('header.admin') : profile.roles.find(x => x === 'AGENT') ? t('header.agent') : t('header.client')}
                                 </Button>
                             </div>
                         </div>
                         :
-                        <Button href="/login">Регистрация/Вход</Button>
+                        <Button href="/login">{t('header.btn_reg')}</Button>
                 }
             </div>
         </header>
     );
 }
+
+
+{/* <div>
+                {isLoading ?
+                    <Loader /> : profile ?
+                        <div className="">
+                            <Button href={profile.roles.find(x => x === 'ADMIN') ? "/dashboard" : profile.roles.find(x => x === 'AGENT') ? "/profile" : "/profile"}>
+                                {profile.fullname}
+                            </Button>
+                            <div className="mt-1">
+                                <Button color="gray">
+                                    {t('header.status')} {profile.roles.find(x => x === 'ADMIN') ? t('header.admin') : profile.roles.find(x => x === 'AGENT') ? t('header.agent') : t('header.client')}
+                                </Button>
+                            </div>
+                        </div>
+                        :
+                        <Button href="/login">{t('header.btn_reg')}</Button>
+                }
+            </div> */}

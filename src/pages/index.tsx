@@ -12,8 +12,14 @@ import { useModal } from "@/hooks/useModal";
 import { useAppSelector } from "@/store/hooks";
 import { selectGetMe, useUserGetQuery } from "@/services/authService";
 import { AuthLink } from "@/components/UI/authLink";
+import HeadLayout from "@/layout/headLayout";
+import { useTranslation } from "next-i18next";
+import { NextPageContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Home = () => {
+
+  const { t } = useTranslation('locale');
 
   const user = useAppSelector((state) => selectGetMe(state))
 
@@ -64,37 +70,55 @@ const Home = () => {
   })
 
   return (
-    <section className="flex flex-col mt-20 items-center">
+    <HeadLayout title={t('metategs.home_page.title')} description={t('metategs.home_page.description')} keywords={t('metategs.home_page.keywords')}>
+      <section className="flex flex-col mt-20 items-center">
 
-      <ModalComponent title="С Вами свяжется менеджер! Все отклики на заявку можете посмотреть в личном кабинете" isOpen={isOpenConfirm} closeModal={onCloseConfirm}>
-        <div className="flex w-full mt-5 items-center gap-5 justify-center">
-          <Button color="gray56" onClick={onCloseConfirm}>Закрыть</Button>
-          <Button href="/main">Личный кабинет</Button>
-        </div>
-      </ModalComponent>
+        <ModalComponent title="С Вами свяжется менеджер! Все отклики на заявку можете посмотреть в личном кабинете" isOpen={isOpenConfirm} closeModal={onCloseConfirm}>
+          <div className="flex w-full mt-5 items-center gap-5 justify-center">
+            <Button color="gray56" onClick={onCloseConfirm}>Закрыть</Button>
+            <Button href="/main">Личный кабинет</Button>
+          </div>
+        </ModalComponent>
 
-      <ModalComponent title="Для продолжения нужно войти в систему" isOpen={isOpen} closeModal={onCloseModal}>
-        <div className="flex mt-5 items-center gap-5 justify-center">
-          <Button color="gray56" href="/login">Вход</Button>
-          <Button href="/registration">Регистрация</Button>
-        </div>
-      </ModalComponent>
+        <ModalComponent title="Для продолжения нужно войти в систему" isOpen={isOpen} closeModal={onCloseModal}>
+          <div className="flex mt-5 items-center gap-5 justify-center">
+            <Button color="gray56" href="/login">Вход</Button>
+            <Button href="/registration">Регистрация</Button>
+          </div>
+        </ModalComponent>
 
-      <div className="text-xl">Создать заявку</div>
-      {user && <AuthLink title="Вернуться в" link="профиль" href="/main" />}
-      <FormConstructor
-        containerClassName="mt-7 lg:w-1/2"
-        formClassName="grid grid-cols-1 gap-2.5"
-        sendForm={handleSubmit(data => sendForm(data))}
-        register={register} fieldList={state}
-        errors={errors} control={control}
-      >
-        <div className="w-[200px]">
-          <Button onClick={profile ? undefined : onOpenModal} submit={profile ? true : false} color="blue">РАСЧЕТ СТОИМОСТИ</Button>
-        </div>
-      </FormConstructor>
-    </section>
+        <div className="text-xl">Создать заявку</div>
+        {user && <AuthLink title="Вернуться в" link="профиль" href="/main" />}
+        <FormConstructor
+          containerClassName="mt-7 lg:w-1/2"
+          formClassName="grid grid-cols-1 gap-2.5"
+          sendForm={handleSubmit(data => sendForm(data))}
+          register={register} fieldList={state}
+          errors={errors} control={control}
+        >
+          <div className="w-[200px]">
+            <Button onClick={profile ? undefined : onOpenModal} submit={profile ? true : false} color="blue">РАСЧЕТ СТОИМОСТИ</Button>
+          </div>
+        </FormConstructor>
+      </section>
+    </HeadLayout>
   );
 }
 
 export default Home;
+
+
+export const getServerSideProps = async (ctx: NextPageContext) => {
+
+  // Определяем локализацию
+  const lang = ctx.locale
+
+  return {
+      props: {
+          ...(await serverSideTranslations(lang ?? 'ru', [
+              'common',
+              'locale'
+          ])),
+      },
+  }
+};

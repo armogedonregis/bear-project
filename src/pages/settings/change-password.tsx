@@ -7,6 +7,7 @@ import { isAuth } from "@/utils/isAuth";
 import { ChangePasswordSchema, IChangePassword } from "@/utils/yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPageContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -75,7 +76,10 @@ export const getServerSideProps = async (ctx: NextPageContext) => {
 
     return {
         props: {
-
+            ...(await serverSideTranslations(lang ?? 'ru', [
+                'common',
+                'locale'
+            ])),
         },
     }
 };

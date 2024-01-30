@@ -1,6 +1,6 @@
 import { ICreateAppliaction } from "@/utils/yupSchema";
 import { bearplusApi } from "./bearplusApi";
-import { IApplicationDanger, IApplicationResponse } from "@/types/application";
+import { IAgentApplication, IApplicationDanger, IApplicationResponse } from "@/types/application";
 
 
 const calculationService = bearplusApi.injectEndpoints({
@@ -23,6 +23,12 @@ const calculationService = bearplusApi.injectEndpoints({
         applicationGetAllAgent: build.query<IApplicationDanger[], unknown>({
             query: () => ({
                 url: '/applications/agent',
+            }),
+        }),
+        // get all agent application
+        applicationGetAllRespondAgent: build.query<IAgentApplication[], unknown>({
+            query: () => ({
+                url: '/applications/agent-applications ',
             }),
         }),
         // get all danger requests
@@ -53,5 +59,6 @@ export const {
     useApplicationGetAllDangerQuery,
     useApplicationGetByIdQuery,
     useApplicationGetAllClientQuery,
-    useApplicationGetAllAgentQuery
+    useApplicationGetAllAgentQuery,
+    useApplicationGetAllRespondAgentQuery
 } = calculationService;

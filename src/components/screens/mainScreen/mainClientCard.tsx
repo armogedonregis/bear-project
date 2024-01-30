@@ -3,7 +3,7 @@ import { TextCard } from "@/components/UI/textCard";
 import { ModalComponent } from "@/components/modal";
 import { useModal } from "@/hooks/useModal";
 import { useApplicationGetAllClientQuery } from "@/services/calculationService";
-import { useRespondApproveStatusClientMutation, useRespondClientByApplicationIdQuery, useRespondClientByResponseIdQuery } from "@/services/requestService";
+import { useRespondApproveStatusClientMutation, useRespondApproveStatusClientStepTwoMutation, useRespondClientByApplicationIdQuery, useRespondClientByResponseIdQuery } from "@/services/requestService";
 import { IRespond } from "@/types/respond";
 import formatDateDistanceToNow from "@/utils/formatDateDistanceToNow";
 import { useState } from "react";
@@ -110,8 +110,11 @@ export const MainClientIdAgentCard = ({ respId, appId }: MainClientIdAgentCardPr
     const { data: agent } = useRespondClientByResponseIdQuery({ responseId: respId, applicationId: appId })
 
     const { isOpen: isOpenConfirm, onCloseModal: onCloseConfirm, onOpenModal: onOpenModalConfirm } = useModal();
+    const { isOpen, onCloseModal, onOpenModal } = useModal();
 
     const [confirmAgent] = useRespondApproveStatusClientMutation()
+
+    const [confirmStepTwo] = useRespondApproveStatusClientStepTwoMutation()
 
     const confirmSend = () => {
         confirmAgent({ applicationId: appId, responseId: respId }).unwrap()
@@ -128,8 +131,30 @@ export const MainClientIdAgentCard = ({ respId, appId }: MainClientIdAgentCardPr
             })
     }
 
+    const confirmTwoSend = () => {
+        confirmStepTwo({ applicationId: appId, responseId: respId }).unwrap()
+            .then((res) => {
+                toast.success(`Вы подтвердили отклик`, {
+                    position: 'bottom-right'
+                });
+                onCloseModal()
+            }).catch(() => {
+                toast.error(`При оставлении отклика что-то пошло не так`, {
+                    position: 'bottom-right'
+                });
+                onCloseModal()
+            })
+    }
+
     return (
         <>
+            <ModalComponent title={`Подтвердить агента к работе ${agent?.fullname}`} isOpen={isOpen} closeModal={onCloseModal}>
+                <div className="flex w-full mt-5 items-center gap-5 justify-center">
+                    <Button color="gray56" onClick={onCloseModal}>Отменить</Button>
+                    <Button onClick={confirmTwoSend}>Подтвердить</Button>
+                </div>
+            </ModalComponent>
+
             <ModalComponent title={`Подтвердить агента ${agent?.fullname} к выполнение`} isOpen={isOpenConfirm} closeModal={onCloseConfirm}>
                 <div className="flex w-full mt-5 items-center gap-5 justify-center">
                     <Button color="gray56" onClick={onCloseConfirm}>Отменить</Button>
@@ -148,9 +173,15 @@ export const MainClientIdAgentCard = ({ respId, appId }: MainClientIdAgentCardPr
                     <TextCard first="Цена: ">{agent?.price}</TextCard>
                     <TextCard first="Отклик: ">{agent?.description}</TextCard>
                     <div className="mt-10">
+                        {agent.startUpStatus === false ? 
                         <div className="w-[400px] mb-3">
                             <Button onClick={onOpenModalConfirm} color="greenSm">Подтвердить агента к работе</Button>
+                        </div> 
+                        :
+                        <div className="w-[400px] mb-3">
+                            <Button onClick={onOpenModal} color="greenSm">Подтвердить агента ко второму этапу</Button>
                         </div>
+                        }
                         <div className="w-[250px]">
                             <Button color="redSm">Отменить</Button>
                         </div>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/UI/button";
-import { MainAgentCard, MainAgentDangerCard } from "@/components/screens/mainScreen/mainAgentCard";
+import { MainAgentCard, MainAgentDangerCard, MainCardAgentRespond } from "@/components/screens/mainScreen/mainAgentCard";
 import { MainClientCard } from "@/components/screens/mainScreen/mainClientCard";
 import { useUserGetQuery } from "@/services/authService";
 import { bearplusApi } from "@/services/bearplusApi";
@@ -11,10 +11,11 @@ import { useState } from "react";
 import { useTranslation } from 'next-i18next';
 import { toast } from "react-toastify";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import HeadLayout from "@/layout/headLayout";
 
 
 const Main = () => {
-    const { t, i18n } = useTranslation('locale')
+    const { t } = useTranslation('locale')
     const dispatch = useAppDispatch()
 
     const { data: user, isLoading } = useUserGetQuery(undefined, {
@@ -38,42 +39,46 @@ const Main = () => {
     const [changePage, setChangePage] = useState<number>(0);
 
     return (
-        <section className="mt-6 lg:mt-20">
-            <div className="flex lg:flex-row flex-col gap-5 lg:gap-12">
-                <div className="flex flex-col gap-5 lg:w-[300px] lg:h-[600px]">
-                    {user && role ?
-                        <>
-                        <Button href="/">{t('main_page.client.create_btn')}</Button>
-                        <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.client.my_btn')}</Button>
-                        </>
-                        :
-                        <>
-                            <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.agent.all_request_btn')}</Button>
-                            <Button active={changePage === 1} onClick={() => setChangePage(1)}>{t('main_page.agent.request_work')}</Button>
-                        </>
-                    }
-                    <Button href="/settings/change-password">{t('main_page.settings_btn')}</Button>
-                    <div className="lg:mt-auto">
-                        <Button onClick={handleLogout} color="red">{t('main_page.logout')}</Button>
-                    </div>
-                </div>
-                <div className="lg:w-1/2">
-                    {isLoading ?
-                        null :
-                        user && role ?
-                        <>
-                            {changePage === 0 && <MainClientCard />}
-                            {changePage === 1 && <MainClientCard />}
-                        </>
+        <HeadLayout title={t('metategs.main_page.title')} description={t('metategs.main_page.description')} keywords={t('metategs.main_page.keywords')}>
+            <section className="mt-6 lg:mt-20">
+                <div className="flex lg:flex-row flex-col gap-5 lg:gap-12">
+                    <div className="flex flex-col gap-5 lg:w-[300px] lg:h-[600px]">
+                        {user && role ?
+                            <>
+                            <Button href="/">{t('main_page.client.create_btn')}</Button>
+                            <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.client.my_btn')}</Button>
+                            </>
                             :
                             <>
-                            {changePage === 0 && <MainAgentDangerCard />}
-                            {changePage === 1 && <MainAgentCard />}
+                                <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.agent.all_request_btn')}</Button>
+                                <Button active={changePage === 1} onClick={() => setChangePage(1)}>{t('main_page.agent.request_work')}</Button>
+                                <Button active={changePage === 2} onClick={() => setChangePage(2)}>{t('main_page.agent.request_respond_btn')}</Button>
                             </>
-                    }
+                        }
+                        <Button href="/settings/change-password">{t('main_page.settings_btn')}</Button>
+                        <div className="lg:mt-auto">
+                            <Button onClick={handleLogout} color="red">{t('main_page.logout')}</Button>
+                        </div>
+                    </div>
+                    <div className="lg:w-1/2">
+                        {isLoading ?
+                            null :
+                            user && role ?
+                            <>
+                                {changePage === 0 && <MainClientCard />}
+                                {changePage === 1 && <MainClientCard />}
+                            </>
+                                :
+                                <>
+                                {changePage === 0 && <MainAgentDangerCard />}
+                                {changePage === 1 && <MainAgentCard />}
+                                {changePage === 2 && <MainCardAgentRespond />}
+                                </>
+                        }
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </HeadLayout>
     );
 }
 

@@ -27,3 +27,20 @@ export type IApplicationDanger = {
     statusRequestForAgent: string;
     statusRequestForClient: string;
 }
+
+export type IAgentApplication = {
+    _id: string;
+    application: {
+        _id: string;
+        pointOfDeparture: string;
+        pointOfArrival: string;
+        containerType: string;
+        statusDanger: true,
+        phoneNumber: string;
+        createdAt: string;
+        updatedAt: string;
+    },
+    user: string;
+    createdAt: string;
+    updatedAt: string;
+}

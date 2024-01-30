@@ -6,6 +6,7 @@ import { setCredentialsNull } from "@/store/slice/authSlice";
 import { IUser } from "@/types/user";
 import { authLogout, isAuth } from "@/utils/isAuth";
 import { NextPageContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -107,6 +108,9 @@ export default AdminPage;
 export const getServerSideProps = async (ctx: NextPageContext) => {
   const isAuthencate = await isAuth(ctx)
 
+  // Определяем локализацию
+  const lang = ctx.locale
+
   if (!isAuthencate && (isAuthencate.data.roles.find((x: string) => x === 'ADMIN') ? true : false)) {
     return {
       redirect: {
@@ -118,6 +122,10 @@ export const getServerSideProps = async (ctx: NextPageContext) => {
 
   return {
     props: {
+      ...(await serverSideTranslations(lang ?? 'ru', [
+        'common',
+        'locale'
+      ])),
       admin: isAuthencate.data
     },
   }
