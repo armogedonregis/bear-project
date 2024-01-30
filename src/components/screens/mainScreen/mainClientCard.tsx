@@ -3,7 +3,7 @@ import { TextCard } from "@/components/UI/textCard";
 import { ModalComponent } from "@/components/modal";
 import { useModal } from "@/hooks/useModal";
 import { useApplicationGetAllClientQuery } from "@/services/calculationService";
-import { useRespondApproveStatusClientMutation, useRespondApproveStatusClientStepTwoMutation, useRespondClientByApplicationIdQuery, useRespondClientByResponseIdQuery } from "@/services/requestService";
+import { useRespondApproveStatusClientCancelMutation, useRespondApproveStatusClientMutation, useRespondApproveStatusClientStepTwoMutation, useRespondClientByApplicationIdQuery, useRespondClientByResponseIdQuery } from "@/services/requestService";
 import { IRespond } from "@/types/respond";
 import formatDateDistanceToNow from "@/utils/formatDateDistanceToNow";
 import { useState } from "react";
@@ -112,9 +112,14 @@ export const MainClientIdAgentCard = ({ respId, appId }: MainClientIdAgentCardPr
     const { isOpen: isOpenConfirm, onCloseModal: onCloseConfirm, onOpenModal: onOpenModalConfirm } = useModal();
     const { isOpen, onCloseModal, onOpenModal } = useModal();
 
+    const { isOpen: isOpenCancel, onCloseModal: onCloseModalCancel, onOpenModal: onOpenModalCancel } = useModal();
+
+
     const [confirmAgent] = useRespondApproveStatusClientMutation()
 
     const [confirmStepTwo] = useRespondApproveStatusClientStepTwoMutation()
+
+    const [cancelRequest] = useRespondApproveStatusClientCancelMutation()
 
     const confirmSend = () => {
         confirmAgent({ applicationId: appId, responseId: respId }).unwrap()
@@ -146,8 +151,32 @@ export const MainClientIdAgentCard = ({ respId, appId }: MainClientIdAgentCardPr
             })
     }
 
+    const cancelSend = () => {
+        cancelRequest({ applicationId: appId, responseId: respId }).unwrap()
+            .then((res) => {
+                toast.success(`Вы отменили отклик`, {
+                    position: 'bottom-right'
+                });
+                onCloseModal()
+            }).catch(() => {
+                toast.error(`При отмене отклика что-то пошло не так`, {
+                    position: 'bottom-right'
+                });
+                onCloseModal()
+            })
+    }
+
+
     return (
         <>
+
+            <ModalComponent title={`Отменить работу с агентом ${agent?.fullname}`} isOpen={isOpenCancel} closeModal={onCloseModalCancel}>
+                <div className="flex w-full mt-5 items-center gap-5 justify-center">
+                    <Button color="gray56" onClick={onCloseModalCancel}>Отменить</Button>
+                    <Button onClick={cancelSend}>Подтвердить</Button>
+                </div>
+            </ModalComponent>
+
             <ModalComponent title={`Подтвердить агента к работе ${agent?.fullname}`} isOpen={isOpen} closeModal={onCloseModal}>
                 <div className="flex w-full mt-5 items-center gap-5 justify-center">
                     <Button color="gray56" onClick={onCloseModal}>Отменить</Button>
@@ -173,17 +202,17 @@ export const MainClientIdAgentCard = ({ respId, appId }: MainClientIdAgentCardPr
                     <TextCard first="Цена: ">{agent?.price}</TextCard>
                     <TextCard first="Отклик: ">{agent?.description}</TextCard>
                     <div className="mt-10">
-                        {agent.startUpStatus === false ? 
-                        <div className="w-[400px] mb-3">
-                            <Button onClick={onOpenModalConfirm} color="greenSm">Подтвердить агента к работе</Button>
-                        </div> 
-                        :
-                        <div className="w-[400px] mb-3">
-                            <Button onClick={onOpenModal} color="greenSm">Подтвердить агента ко второму этапу</Button>
-                        </div>
+                        {agent.startUpStatus === false ?
+                            <div className="w-[400px] mb-3">
+                                <Button onClick={onOpenModalConfirm} color="greenSm">Подтвердить агента к работе</Button>
+                            </div>
+                            :
+                            <div className="w-[400px] mb-3">
+                                <Button onClick={onOpenModal} color="greenSm">Подтвердить агента ко второму этапу</Button>
+                            </div>
                         }
                         <div className="w-[250px]">
-                            <Button color="redSm">Отменить</Button>
+                            <Button onClick={onOpenModalCancel} color="redSm">Отменить</Button>
                         </div>
                     </div>
                 </div>}

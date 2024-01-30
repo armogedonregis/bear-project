@@ -12,24 +12,46 @@ const calculationService = bearplusApi.injectEndpoints({
                 url: '/applications/create',
                 body: data
             }),
+            invalidatesTags: [{ type: 'Requests', id: 'LIST' }],
         }),
         // get all client requests
         applicationGetAllClient: build.query<IApplicationDanger[], unknown>({
             query: () => ({
                 url: '/applications/client',
             }),
+            providesTags: (result) =>
+                result
+                    ? [
+                        ...result.map(({ _id }) => ({ type: 'Requests' as const, _id })),
+                        { type: 'Requests', id: 'LIST' },
+                    ]
+                    : [{ type: 'Requests', id: 'LIST' }],
         }),
         // get all agent requests
         applicationGetAllAgent: build.query<IApplicationDanger[], unknown>({
             query: () => ({
                 url: '/applications/agent',
             }),
+            providesTags: (result) =>
+                result
+                    ? [
+                        ...result.map(({ _id }) => ({ type: 'Requests' as const, _id })),
+                        { type: 'Requests', id: 'LIST' },
+                    ]
+                    : [{ type: 'Requests', id: 'LIST' }],
         }),
         // get all agent application
         applicationGetAllRespondAgent: build.query<IAgentApplication[], unknown>({
             query: () => ({
                 url: '/applications/agent-applications ',
             }),
+            providesTags: (result) =>
+                result
+                    ? [
+                        ...result.map(({ _id }) => ({ type: 'Requests' as const, _id })),
+                        { type: 'Requests', id: 'LIST' },
+                    ]
+                    : [{ type: 'Requests', id: 'LIST' }],
         }),
         // get all danger requests
         applicationGetAllDanger: build.query<IApplicationDanger[], unknown>({
@@ -49,6 +71,7 @@ const calculationService = bearplusApi.injectEndpoints({
             query: (id) => ({
                 url: `/applications/danger-requests/${id}`,
             }),
+            providesTags: [{ type: 'Requests', id: 'LIST' }],
         }),
     }),
     overrideExisting: false,
