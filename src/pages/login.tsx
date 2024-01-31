@@ -36,11 +36,11 @@ const Login = () => {
                 dispatch(setCredentials({ token: res.token }))
                 authLogin(res.token)
                 router.push('/main')
-                toast.success(`Вы успешно вошли`, {
+                toast.success(t('login_page.forgot_password'), {
                     position: 'bottom-right'
                 });
             }).catch(() => {
-                toast.error(`Неправильный email или пароль`, {
+                toast.error(t('login_page.error_modal'), {
                     position: 'bottom-right'
                 });
             })
@@ -55,14 +55,14 @@ const Login = () => {
                     register={register} fieldList={authLoginForm}
                     errors={errors}
                 >
-                    <AuthLink title="Забыли пароль?" link="Восстановить" href="/reset-password" />
+                    <AuthLink title={t('login_page.forgot_password')} link={t('login_page.forgot_link')} href="/reset-password" />
                     <div className="flex justify-center">
                         <div className="lg:w-5/12">
-                            <Button submit color="green">Вход</Button>
+                            <Button submit color="green">{t('login_page.sign_in')}</Button>
                         </div>
                     </div>
 
-                    <AuthLink title="Нет аккаунта?" link="Регистрация" href="/registration" />
+                    <AuthLink title={t('login_page.dont_account')} link={t('login_page.register')} href="/registration" />
                 </FormConstructor>
             </section>
         </HeadLayout>

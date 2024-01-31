@@ -7,12 +7,16 @@ import { isAuth } from "@/utils/isAuth";
 import { ChangePasswordSchema, IChangePassword } from "@/utils/yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPageContext } from "next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const ChangePasswordProfile = () => {
+
+    const { t } = useTranslation('locale');
+
     const { register, handleSubmit, formState: { errors } } = useForm<IChangePassword>({
         resolver: yupResolver(ChangePasswordSchema),
     });
@@ -25,18 +29,18 @@ const ChangePasswordProfile = () => {
             changePassword(data).unwrap()
                 .then((res) => {
                     router.push('/main')
-                    toast.success(`Вы успешно вошли`, {
+                    toast.success(t('change_password_profile_page.success_change'), {
                         position: 'bottom-right'
                     });
                 }).catch(() => {
-                    toast.error(`Неправильный email или пароль`, {
+                    toast.error(t('change_password_profile_page.error_change'), {
                         position: 'bottom-right'
                     });
                 })
     }
     return (
         <section className="flex flex-col mt-6 lg:mt-20 items-center">
-            <div className="text-xl">Смена пароля</div>
+            <div className="text-xl">{t('change_password_profile_page.change_title')}</div>
             <FormConstructor
                 containerClassName="mt-7 w-9/12 lg:w-1/2"
                 formClassName="grid grid-cols-1 gap-2.5"
@@ -44,10 +48,10 @@ const ChangePasswordProfile = () => {
                 register={register} fieldList={changePasswordProfileForm}
                 errors={errors}
             >
-                <AuthLink title="Вернуться" link="назад" href="/main" />
+                <AuthLink title={t('change_password_profile_page.return_title')} link={t('change_password_profile_page.return_link')} href="/main" />
                 <div className="flex justify-center">
                     <div className="lg:w-7/12">
-                        <Button submit color="green">Сменить пароль</Button>
+                        <Button submit color="green">{t('change_password_profile_page.change_password_btn')}</Button>
                     </div>
                 </div>
             </FormConstructor>

@@ -1,47 +1,47 @@
 {
     "metategs": {
         "home_page": {
-            "title": "",
+            "title": "Создайте заявку",
             "keywords": "",
             "description": ""
         },
         "main_page": {
-            "title": "",
+            "title": "Главная",
             "keywords": "",
             "description": ""
         },
         "login_page": {
-            "title": "",
+            "title": "Войдите в систему",
             "keywords": "",
             "description": ""
         },
         "change_password_page": {
-            "title": "",
+            "title": "Сменить пароль",
             "keywords": "",
             "description": ""
         },
         "profile_page": {
-            "title": "",
+            "title": "Профиль",
             "keywords": "",
             "description": ""
         },
         "registration_page": {
-            "title": "",
+            "title": "Регистрация",
             "keywords": "",
             "description": ""
         },
         "reset_password_page": {
-            "title": "",
+            "title": "Сбросить пароль",
             "keywords": "",
             "description": ""
         },
         "settings_change_password_page": {
-            "title": "",
+            "title": "Сменить пароль",
             "keywords": "",
             "description": ""
         },
         "dashboard_admin_page": {
-            "title": "",
+            "title": "Дашбоард",
             "keywords": "",
             "description": ""
         }
@@ -53,12 +53,79 @@
         "client": "Клиент",
         "btn_reg": "Регистрация/Вход"
     },
+    "login_page": {
+        "forgot_password": "Забыли пароль?",
+        "forgot_link": "Восстановить",
+        "sign_in": "вход",
+        "dont_account": "Нет аккаунта?",
+        "register": "Регистрация",
+        "success_modal": "Вы успешно вошли",
+        "error_modal": "Неправильный email или пароль"
+    },
+    "home_page": {
+        "modal_title": "С Вами свяжется менеджер! Все отклики на заявку можете посмотреть в личном кабинете",
+        "close_modal": "Закрыть",
+        "modal_lk": "Для продолжения нужно войти в систему",
+        "lk_link": "Личный кабинет",
+        "sign_in": "Вход",
+        "sign_up": "Регистрация",
+        "create_request": "Создать заявку",
+        "link_back": "Вернуться в",
+        "link_back_title": "профиль",
+        "calculate_price": "РАСЧЕТ СТОИМОСТИ"
+    },
     "main_page": {
         "settings_btn": "Настройки",
         "logout": "Выход",
+        "modal_logout": "Вы вышли из профиля",
         "client": {
             "create_btn": "Создать новую заявку",
-            "my_btn": "Мои заявки"
+            "my_btn": "Мои заявки",
+            "my_request": "Мои заявки",
+            "card_app": {
+                "pointOfDeparture": "Пункт отправления: ",
+                "pointOfArrival": "Пункт прибытия: ",
+                "containerType": "Тип контейнера: ",
+                "characteristicsOfTheCargo": "Характеристика Груза: ",
+                "phoneNumber": "Телефон: ",
+                "countResponses": "Количество откликов: ",
+                "createdAt": "Создан: ",
+                "btn_choise": "Выбрать"
+            },
+            "btn_back": "Вернуться назад",
+            "btn_back_request": "Вернуться в заявку",
+            "request_num": "Заявка",
+            "card_agent": {
+                "title": "Отклик",
+                "fullname": "Агент: ",
+                "phoneNumber": "Телефон: ",
+                "price": "Цена: ",
+                "description": "Отклик: ",
+                "createdAt": "Оставлен: ",
+                "choise_agent": "Выбрать агента",
+                "not_req": "Откликов нет"
+            },
+            "modal": {
+                "success_confirm_req": "Вы подтвердили отклик",
+                "error_confirm_req": "При подтверждении отклика что-то пошло не так",
+                "success_two_confirm_req": "Вы перешли на вторую стадию",
+                "error_two_confirm_req": "При оставлении отклика что-то пошло не так",
+                "sucess_cancel_req": "Вы отказались работать",
+                "error_cancel_req": "При отмене отклика что-то пошло не так"
+            },
+            "btn_cancel": "Отменить",
+            "btn_confirm": "Подтвердить",
+            "cancel_title": "Отменить работу с агентом",
+            "confirm_title": "Подтвердить агента к работе",
+            "confirm_two_title": "Подтвердить к выполнению агента",
+            "agent": "Агент",
+            "request": "Отклик",
+            "phoneNumber": "Телефон: ",
+            "price": "Цена: ",
+            "description":"Отклик: ",
+            "btn_step_confirm": "Подтвердить агента к работе",
+            "btn_final_confirm": "Подтвердить агента ко второму этапу",
+            "btn_cancel_confirm": "Отменить"
         },
         "agent": {
             "all_request_btn": "Все заявки",
@@ -101,5 +168,70 @@
             "confirm_success_request_respond": "Вы подтвердили отклик",
             "confirm_error_request_respond": "При оставлении отклика что-то пошло не так"
         }
+    },
+    "profile_page": {
+        "confirm_create_profile": "Вы успешно создали профиль",
+        "error_create_profile": "При создании профиля произошла ошибка",
+        "btn_create_profile": "Создать"
+    },
+    "registration_page": {
+        "success_registration": "Вы успешно зарегистрировались",
+        "error_registration": "При регистрации произошла ошибка",
+        "sign_in": "Вход",
+        "already_account": "Уже есть аккаунт?",
+        "sign_in_btn": "Войти"
+    },
+    "reset_password": {
+        "success_reset": "Письмо отправлено на email",
+        "error_reset": "Что-то пошло не так или такого email не существует",
+        "return_title": "Вернуться",
+        "return_link": "назад",
+        "change_password_btn": "Сменить пароль"
+    },
+    "change_password_page": {
+        "success_reset": "Письмо отправлено на email",
+        "error_reset": "Что-то пошло не так или такого email не существует",
+        "return_title": "Вернуться",
+        "return_link": "назад",
+        "change_password_btn": "Сменить пароль"
+    },
+    "change_password_profile_page": {
+        "success_change": "Пароль изменен",
+        "error_change": "При смене пароля произошла ошибка",
+        "change_title": "Смена пароля",
+        "return_title": "Вернуться",
+        "return_link": "назад",
+        "change_password_btn": "Сменить пароль"
+    },
+    "dashboard_users_page": {
+        "btn_all": "Все",
+        "btn_unconfirmed": "Неподтвержденные",
+        "btn_logout": "Выход",
+        "title_box": "Не подтвержденные пользователи",
+        "card": {
+            "fio": "ФИО: ",
+            "phoneNumber": "Телефон: ",
+            "email": "Email: ",
+            "typeUser": "Тип аккаунта: ",
+            "typeOOO": "Тип организации",
+            "typeDeal": "Тип работ: ",
+            "confirm": "Подтверждение: ",
+            "confirmed": "Подтвержден",
+            "no_confirmed": "Не подтвержден",
+            "btn_confirm": "Подтвердить"
+        },
+        "modal_confirm": {
+            "title": "Подтверждение аккаунта",
+            "cancel": "Отменить",
+            "confirm": "подтвердить",
+            "success_confirm": "Вы успешно подтвердили аккаунт",
+            "error_confirm": "При подтверждении аккаунта произошла ошибка"
+        }
+    },
+    "logout_modal": {
+        "title": "Вы уверены, что хотите выйти?",
+        "logout_success": "Вы вышли из аккаунта",
+        "btn_cancel": "Отменить",
+        "btn_confirm": "Выйти"
     }
 }

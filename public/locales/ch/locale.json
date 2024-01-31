@@ -1,20 +1,141 @@
 {
+    "metatags": {
+        "home_page": {
+            "title": "创建申请",
+            "keywords": "",
+            "description": ""
+        },
+        "main_page": {
+            "title": "主页",
+            "keywords": "",
+            "description": ""
+        },
+        "login_page": {
+            "title": "登录系统",
+            "keywords": "",
+            "description": ""
+        },
+        "change_password_page": {
+            "title": "更改密码",
+            "keywords": "",
+            "description": ""
+        },
+        "profile_page": {
+            "title": "个人资料",
+            "keywords": "",
+            "description": ""
+        },
+        "registration_page": {
+            "title": "注册",
+            "keywords": "",
+            "description": ""
+        },
+        "reset_password_page": {
+            "title": "重置密码",
+            "keywords": "",
+            "description": ""
+        },
+        "settings_change_password_page": {
+            "title": "更改密码",
+            "keywords": "",
+            "description": ""
+        },
+        "dashboard_admin_page": {
+            "title": "仪表板",
+            "keywords": "",
+            "description": ""
+        }
+    },
+    "header": {
+        "status": "状态: ",
+        "admin": "管理员",
+        "agent": "代理",
+        "client": "客户",
+        "btn_reg": "注册/登录"
+    },
+    "login_page": {
+        "forgot_password": "忘记密码？",
+        "forgot_link": "恢复",
+        "sign_in": "登录",
+        "dont_account": "没有账号？",
+        "register": "注册",
+        "success_modal": "您已成功登录",
+        "error_modal": "电子邮件或密码错误"
+    },
+    "home_page": {
+        "modal_title": "我们将与您联系！您可以在个人账户中查看所有申请的回应",
+        "close_modal": "关闭",
+        "modal_lk": "为了继续，需要登录",
+        "lk_link": "个人账户",
+        "sign_in": "登录",
+        "sign_up": "注册",
+        "create_request": "创建申请",
+        "link_back": "返回到",
+        "link_back_title": "个人资料",
+        "calculate_price": "计算价格"
+    },
     "main_page": {
         "settings_btn": "设置",
         "logout": "退出",
         "client": {
             "create_btn": "创建一个新请求",
-            "my_btn": "我的应用程序"
+            "my_btn": "我的应用程序",
+            "my_request": "我的申请",
+            "card_app": {
+                "pointOfDeparture": "",
+                "pointOfArrival": "",
+                "containerType": "",
+                "characteristicsOfTheCargo": "",
+                "phoneNumber": "",
+                "countResponses": "",
+                "createdAt": "创建于: ",
+                "btn_choise": "选择"
+            },
+            "btn_back": "返回",
+            "btn_back_request": "返回到申请",
+            "request_num": "申请",
+            "card_agent": {
+                "title": "反应",
+                "fullname": "代理: ",
+                "phoneNumber": "电话: ",
+                "price": "价格: ",
+                "description": "反应: ",
+                "createdAt": "留下: ",
+                "choise_agent": "选择代理",
+                "not_req": "没有反应"
+            },
+            "modal": {
+                "success_confirm_req": "你确认了反应",
+                "error_confirm_req": "在确认反应时出现了问题",
+                "success_two_confirm_req": "你转到了第二阶段",
+                "error_two_confirm_req": "在提交反应时出现了问题",
+                "sucess_cancel_req": "你拒绝工作",
+                "error_cancel_req": "在取消反应时出现了问题"
+            },
+            "btn_cancel": "取消",
+            "btn_confirm": "确认",
+            "cancel_title": "取消与代理的工作",
+            "confirm_title": "确认代理开始工作",
+            "confirm_two_title": "确认代理开始第二阶段",
+            "agent": "代理",
+            "request": "反应",
+            "phoneNumber": "电话: ",
+            "price": "价格: ",
+            "description": "反应: ",
+            "btn_step_confirm": "确认代理开始工作",
+            "btn_final_confirm": "确认代理进入第二阶段",
+            "btn_cancel_confirm": "取消"
         },
         "agent": {
-            "all_request_btn": "所有应用程序",
-            "request_work": "申请正在进行中"
+            "all_request_btn": "所有申请",
+            "request_work": "申请正在进行中",
+            "request_respond_btn": "我的反应"
         },
         "agent_card": {
-            "pointOfDeparture": "出发地点：",
-            "pointOfArrival": "到达地点：",
+            "pointOfDeparture": "起点：",
+            "pointOfArrival": "目标：",
             "containerType": "容器类型：",
-            "characteristicsOfTheCargo": "货物的特性：",
+            "characteristicsOfTheCargo": "货物特性：",
             "phoneNumber": "电话：",
             "countResponses": "响应数：",
             "createdAt": "创建者：",
@@ -22,7 +143,7 @@
             "cancel_request_respond": "拒绝完成申请",
             "request_respond_id": "申请",
             "request_respond_respond": "响应",
-            "respond_answer": "回答：",
+            "respond_answer": "答案：",
             "respond_agent": "代理：",
             "respond_phonenumber": "电话：",
             "respond_respond_price": "价格：",
@@ -41,10 +162,75 @@
             "cancel_respond_agent": "拒绝"
         },
         "agent_request": {
-            "confirm_request_success": "您留下了回复",
-            "confirm_request_error": "您留下了回复",
-            "confirm_success_request_respond": "您已确认您的回复",
-            "confirm_error_request_respond": "留下回复时出现问题"
+            "confirm_request_success": "你留下了回复",
+            "confirm_request_error": "你留下了回复",
+            "confirm_success_request_respond": "你已经确认了你的回复",
+            "confirm_error_request_respond": "在留下"
         }
+    },
+    "profile_page": {
+        "confirm_create_profile": "您已成功创建个人资料",
+        "error_create_profile": "创建个人资料时出现错误",
+        "btn_create_profile": "创建"
+    },
+    "registration_page": {
+        "success_registration": "您已成功注册",
+        "error_registration": "注册过程中出现错误",
+        "sign_in": "登录",
+        "already_account": "已有账户？",
+        "sign_in_btn": "登录"
+    },
+    "reset_password": {
+        "success_reset": "电子邮件已发送",
+        "error_reset": "发生错误或该电子邮件不存在",
+        "return_title": "返回",
+        "return_link": "后退",
+        "change_password_btn": "更改密码"
+    },
+    "change_password_page": {
+        "success_reset": "电子邮件已发送",
+        "error_reset": "发生错误或该电子邮件不存在",
+        "return_title": "返回",
+        "return_link": "后退",
+        "change_password_btn": "更改密码"
+    },
+    "change_password_profile_page": {
+        "success_change": "密码已更改",
+        "error_change": "更改密码时出现错误",
+        "change_title": "更改密码",
+        "return_title": "返回",
+        "return_link": "后退",
+        "change_password_btn": "更改密码"
+    },
+    "dashboard_users_page": {
+        "btn_all": "全部",
+        "btn_unconfirmed": "未确认的",
+        "btn_logout": "退出",
+        "title_box": "未确认的用户",
+        "card": {
+            "fio": "姓名: ",
+            "phoneNumber": "电话: ",
+            "email": "电子邮件: ",
+            "typeUser": "账户类型: ",
+            "typeOOO": "组织类型",
+            "typeDeal": "工作类型: ",
+            "confirm": "确认: ",
+            "confirmed": "已确认",
+            "no_confirmed": "未确认",
+            "btn_confirm": "确认"
+        },
+        "modal_confirm": {
+            "title": "确认账户",
+            "cancel": "取消",
+            "confirm": "确认",
+            "success_confirm": "您已成功确认账户",
+            "error_confirm": "确认账户时出现错误"
+        }
+    },
+    "logout_modal": {
+        "title": "您确定要退出吗？",
+        "logout_success": "您已退出账户",
+        "btn_cancel": "取消",
+        "btn_confirm": "退出"
     }
 }

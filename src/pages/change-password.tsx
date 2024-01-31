@@ -39,11 +39,11 @@ const ChangePassword = () => {
                     authLogin(res)
                     localStorage.setItem('email', '')
                     router.push('/main')
-                    toast.success(`Вы успешно вошли`, {
+                    toast.success(t('change_password_page.success_reset'), {
                         position: 'bottom-right'
                     });
                 }).catch(() => {
-                    toast.error(`Неправильный email или пароль`, {
+                    toast.error(t('change_password_page.error_reset'), {
                         position: 'bottom-right'
                     });
                 })
@@ -58,10 +58,10 @@ const ChangePassword = () => {
                     register={register} fieldList={authResetChangePasswordForm}
                     errors={errors}
                 >
-                    <AuthLink title="Вернуться" link="назад" href="/login" />
+                    <AuthLink title={t('change_password_page.return_title')} link={t('change_password_page.return_link')} href="/login" />
                     <div className="flex justify-center">
                         <div className="lg:w-7/12">
-                            <Button submit color="green">Сменить пароль</Button>
+                            <Button submit color="green">{t('change_password_page.change_password_btn')}</Button>
                         </div>
                     </div>
                 </FormConstructor>

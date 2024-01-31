@@ -12,6 +12,8 @@ import { useTranslation } from 'next-i18next';
 import { toast } from "react-toastify";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import HeadLayout from "@/layout/headLayout";
+import { useModal } from "@/hooks/useModal";
+import { ModalComponent } from "@/components/modal";
 
 
 const Main = () => {
@@ -24,9 +26,11 @@ const Main = () => {
         refetchOnReconnect: true
     })
 
+    const { isOpen: isOpenLogout, onCloseModal: onCloseLogout, onOpenModal: onOpenLogout } = useModal();
+
     const handleLogout = () => {
         window.localStorage.setItem('token', '')
-        toast.success('Вы вышли из профиля', {
+        toast.success(t('main_page.modal_logout'), {
             position: 'bottom-center'
         });
         dispatch(setCredentialsNull())
@@ -40,13 +44,21 @@ const Main = () => {
 
     return (
         <HeadLayout title={t('metategs.main_page.title')} description={t('metategs.main_page.description')} keywords={t('metategs.main_page.keywords')}>
+
+            <ModalComponent title={t('logout_modal.title')} isOpen={isOpenLogout} closeModal={onCloseLogout}>
+                <div className="flex w-full mt-5 items-center gap-5 justify-center">
+                    <Button color="gray56" onClick={onCloseLogout}>{t('logout_modal.btn_cancel')}</Button>
+                    <Button onClick={handleLogout}>{t('logout_modal.btn_confirm')}</Button>
+                </div>
+            </ModalComponent>
+
             <section className="mt-6 lg:mt-20">
                 <div className="flex lg:flex-row flex-col gap-5 lg:gap-12">
                     <div className="flex flex-col gap-5 lg:w-[300px] lg:h-[600px]">
                         {user && role ?
                             <>
-                            <Button href="/">{t('main_page.client.create_btn')}</Button>
-                            <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.client.my_btn')}</Button>
+                                <Button href="/">{t('main_page.client.create_btn')}</Button>
+                                <Button active={changePage === 0} onClick={() => setChangePage(0)}>{t('main_page.client.my_btn')}</Button>
                             </>
                             :
                             <>
@@ -57,22 +69,22 @@ const Main = () => {
                         }
                         <Button href="/settings/change-password">{t('main_page.settings_btn')}</Button>
                         <div className="lg:mt-auto">
-                            <Button onClick={handleLogout} color="red">{t('main_page.logout')}</Button>
+                            <Button onClick={onOpenLogout} color="red">{t('main_page.logout')}</Button>
                         </div>
                     </div>
                     <div className="lg:w-1/2">
                         {isLoading ?
                             null :
                             user && role ?
-                            <>
-                                {changePage === 0 && <MainClientCard />}
-                                {changePage === 1 && <MainClientCard />}
-                            </>
+                                <>
+                                    {changePage === 0 && <MainClientCard />}
+                                    {changePage === 1 && <MainClientCard />}
+                                </>
                                 :
                                 <>
-                                {changePage === 0 && <MainAgentDangerCard />}
-                                {changePage === 1 && <MainAgentCard />}
-                                {changePage === 2 && <MainCardAgentRespond />}
+                                    {changePage === 0 && <MainAgentDangerCard />}
+                                    {changePage === 1 && <MainAgentCard />}
+                                    {changePage === 2 && <MainCardAgentRespond />}
                                 </>
                         }
                     </div>

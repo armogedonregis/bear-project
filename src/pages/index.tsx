@@ -55,7 +55,7 @@ const Home = () => {
         });
         onOpenModalConfirm()
       }).catch(() => {
-        toast.error(`Неправильный email или пароль`, {
+        toast.error(`При создании заявки что-то пошло не так`, {
           position: 'bottom-right'
         });
       })
@@ -73,22 +73,22 @@ const Home = () => {
     <HeadLayout title={t('metategs.home_page.title')} description={t('metategs.home_page.description')} keywords={t('metategs.home_page.keywords')}>
       <section className="flex flex-col mt-20 items-center">
 
-        <ModalComponent title="С Вами свяжется менеджер! Все отклики на заявку можете посмотреть в личном кабинете" isOpen={isOpenConfirm} closeModal={onCloseConfirm}>
+        <ModalComponent title={t('home_page.modal_title')} isOpen={isOpenConfirm} closeModal={onCloseConfirm}>
           <div className="flex w-full mt-5 items-center gap-5 justify-center">
-            <Button color="gray56" onClick={onCloseConfirm}>Закрыть</Button>
-            <Button href="/main">Личный кабинет</Button>
+            <Button color="gray56" onClick={onCloseConfirm}>{t('home_page.close_modal')}</Button>
+            <Button href="/main">{t('home_page.lk_link')}</Button>
           </div>
         </ModalComponent>
 
-        <ModalComponent title="Для продолжения нужно войти в систему" isOpen={isOpen} closeModal={onCloseModal}>
+        <ModalComponent title={t('home_page.modal_lk')} isOpen={isOpen} closeModal={onCloseModal}>
           <div className="flex mt-5 items-center gap-5 justify-center">
-            <Button color="gray56" href="/login">Вход</Button>
-            <Button href="/registration">Регистрация</Button>
+            <Button color="gray56" href="/login">{t('home_page.sign_in')}</Button>
+            <Button href="/registration">{t('home_page.sign_up')}</Button>
           </div>
         </ModalComponent>
 
-        <div className="text-xl">Создать заявку</div>
-        {user && <AuthLink title="Вернуться в" link="профиль" href="/main" />}
+        <div className="text-xl">{t('home_page.create_request')}</div>
+        {user && <AuthLink title={t('home_page.link_back')} link={t('home_page.link_back_title')} href="/main" />}
         <FormConstructor
           containerClassName="mt-7 lg:w-1/2"
           formClassName="grid grid-cols-1 gap-2.5"
@@ -97,7 +97,7 @@ const Home = () => {
           errors={errors} control={control}
         >
           <div className="w-[200px]">
-            <Button onClick={profile ? undefined : onOpenModal} submit={profile ? true : false} color="blue">РАСЧЕТ СТОИМОСТИ</Button>
+            <Button onClick={profile ? undefined : onOpenModal} submit={profile ? true : false} color="blue">{t('home_page.calculate_price')}</Button>
           </div>
         </FormConstructor>
       </section>

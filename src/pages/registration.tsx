@@ -49,11 +49,11 @@ const Registration = () => {
                 dispatch(setCredentials({ token: res.token }))
                 authLogin(res.token)
                 router.push('/main')
-                toast.success(`Вы успешно зарегистрировались`, {
+                toast.success(t('registration_page.success_registration'), {
                     position: 'bottom-right'
                 });
             }).catch(() => {
-                toast.error(`Что-то пошло не так`, {
+                toast.error(t('registration_page.error_registration'), {
                     position: 'bottom-right'
                 });
             })
@@ -70,11 +70,11 @@ const Registration = () => {
                 >
                     <div className="flex justify-center">
                         <div className="lg:w-5/12">
-                            <Button submit color="green">Вход</Button>
+                            <Button submit color="green">{t('registration_page.sign_in')}</Button>
                         </div>
                     </div>
 
-                    <AuthLink title="Уже есть аккаунт?" link="Войти" href="/login" />
+                    <AuthLink title={t('registration_page.already_account')} link={t('registration_page.sign_in_btn')} href="/login" />
                 </FormConstructor>
             </section>
         </HeadLayout>

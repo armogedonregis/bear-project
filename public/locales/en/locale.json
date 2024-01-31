@@ -1,14 +1,135 @@
 {
+    "metatags": {
+        "home_page": {
+            "title": "Create a request",
+            "keywords": "",
+            "description": ""
+        },
+        "main_page": {
+            "title": "Home",
+            "keywords": "",
+            "description": ""
+        },
+        "login_page": {
+            "title": "Sign in",
+            "keywords": "",
+            "description": ""
+        },
+        "change_password_page": {
+            "title": "Change password",
+            "keywords": "",
+            "description": ""
+        },
+        "profile_page": {
+            "title": "Profile",
+            "keywords": "",
+            "description": ""
+        },
+        "registration_page": {
+            "title": "Registration",
+            "keywords": "",
+            "description": ""
+        },
+        "reset_password_page": {
+            "title": "Reset the password",
+            "keywords": "",
+            "description": ""
+        },
+        "settings_change_password_page": {
+            "title": "Change password",
+            "keywords": "",
+            "description": ""
+        },
+        "dashboard_admin_page": {
+            "title": "Dashboard",
+            "keywords": "",
+            "description": ""
+        }
+    },
+    "header": {
+        "status": "Status:",
+        "admin": "Admin",
+        "agent": "Agent",
+        "client": "Client",
+        "btn_reg": "Register/Login"
+    },
+    "login_page": {
+        "forgot_password": "Forgot your password?",
+        "forgot_link": "Restore",
+        "sign_in": "sign in",
+        "dont_account": "Don't have an account?",
+        "register": "Registration",
+        "success_modal": "You have successfully logged in",
+        "error_modal": "Incorrect email or password"
+    },
+    "home_page": {
+        "modal_title": "A manager will contact you! You can view all responses to your application in your personal account.",
+        "close_modal": "Close",
+        "modal_lk": "You must be logged in to continue.",
+        "lk_link": "Personal Area",
+        "sign_in": "Sign in",
+        "sign_up": "Registration",
+        "create_request": "Create a request",
+        "link_back": "Return to",
+        "link_back_title": "profile",
+        "calculate_price": "COST CALCULATION"
+    },
     "main_page": {
         "settings_btn": "Settings",
         "logout": "Exit",
         "client": {
             "create_btn": "Create a new request",
-            "my_btn": "My applications"
+            "my_btn": "My applications",
+            "my_request": "My applications",
+            "card_app": {
+                "pointOfDeparture": "Point of departure: ",
+                "pointOfArrival": "Arrival point: ",
+                "containerType": "Container type: ",
+                "characteristicsOfTheCargo": "Characteristics of the Cargo: ",
+                "phoneNumber": "Telephone: ",
+                "countResponses": "Number of responses: ",
+                "createdAt": "Created by:",
+                "btn_choise": "Choose"
+            },
+            "btn_back": "Come back",
+            "btn_back_request": "Return to application",
+            "request_num": "Application",
+            "card_agent": {
+                "title": "Response",
+                "fullname": "Agent: ",
+                "phoneNumber": "Telephone: ",
+                "price": "Price: ",
+                "description": "Response: ",
+                "createdAt": "Left: ",
+                "choise_agent": "Choose an agent",
+                "not_req": "No replies"
+            },
+            "modal": {
+                "success_confirm_req": "You have confirmed your response",
+                "error_confirm_req": "Something went wrong while confirming the response",
+                "success_two_confirm_req": "You have moved to the second stage",
+                "error_two_confirm_req": "Something went wrong while leaving a response",
+                "sucess_cancel_req": "You refused to work",
+                "error_cancel_req": "Something went wrong while cancelling the response"
+            },
+            "btn_cancel": "Cancel",
+            "btn_confirm": "Confirm",
+            "cancel_title": "Cancel work with the agent",
+            "confirm_title": "Confirm the agent for work",
+            "confirm_two_title": "Confirm the agent for execution",
+            "agent": "Agent",
+            "request": "Response",
+            "phoneNumber": "Phone: ",
+            "price": "Price: ",
+            "description": "Response: ",
+            "btn_step_confirm": "Confirm the agent for work",
+            "btn_final_confirm": "Confirm the agent for the second stage",
+            "btn_cancel_confirm": "Cancel"
         },
         "agent": {
             "all_request_btn": "All applications",
-            "request_work": "Applications in progress"
+            "request_work": "Applications in progress",
+            "request_respond_btn": "My responses"
         },
         "agent_card": {
             "pointOfDeparture": "Point of departure: ",
@@ -46,5 +167,70 @@
             "confirm_success_request_respond": "You have confirmed your response",
             "confirm_error_request_respond": "Something went wrong while leaving a response"
         }
+    },
+    "profile_page": {
+        "confirm_create_profile": "You have successfully created a profile",
+        "error_create_profile": "An error occurred while creating a profile",
+        "btn_create_profile": "Create"
+    },
+    "registration_page": {
+        "success_registration": "You have successfully registered",
+        "error_registration": "An error occurred during registration",
+        "sign_in": "Sign In",
+        "already_account": "Already have an account?",
+        "sign_in_btn": "Sign In"
+    },
+    "reset_password": {
+        "success_reset": "Email has been sent",
+        "error_reset": "Something went wrong or the email does not exist",
+        "return_title": "Return",
+        "return_link": "back",
+        "change_password_btn": "Change password"
+    },
+    "change_password_page": {
+        "success_reset": "Email has been sent",
+        "error_reset": "Something went wrong or the email does not exist",
+        "return_title": "Return",
+        "return_link": "back",
+        "change_password_btn": "Change password"
+    },
+    "change_password_profile_page": {
+        "success_change": "Password changed",
+        "error_change": "An error occurred while changing the password",
+        "change_title": "Change password",
+        "return_title": "Return",
+        "return_link": "back",
+        "change_password_btn": "Change password"
+    },
+    "dashboard_users_page": {
+        "btn_all": "All",
+        "btn_unconfirmed": "Unconfirmed",
+        "btn_logout": "Logout",
+        "title_box": "Unconfirmed users",
+        "card": {
+            "fio": "Full Name: ",
+            "phoneNumber": "Phone: ",
+            "email": "Email: ",
+            "typeUser": "Account Type: ",
+            "typeOOO": "Organization Type",
+            "typeDeal": "Work Type: ",
+            "confirm": "Confirmation: ",
+            "confirmed": "Confirmed",
+            "no_confirmed": "Not Confirmed",
+            "btn_confirm": "Confirm"
+        },
+        "modal_confirm": {
+            "title": "Account Confirmation",
+            "cancel": "Cancel",
+            "confirm": "confirm",
+            "success_confirm": "You have successfully confirmed the account",
+            "error_confirm": "An error occurred while confirming the account"
+        }
+    },
+    "logout_modal": {
+        "title": "Are you sure you want to log out?",
+        "logout_success": "You have logged out of the account",
+        "btn_cancel": "Cancel",
+        "btn_confirm": "Logout"
     }
 }

@@ -31,11 +31,11 @@ const ResetPassword = () => {
             .then((res) => {
                 localStorage.setItem('email', res)
                 router.push('/change-password')
-                toast.success(`Письмо отправлено на email`, {
+                toast.success(t('reset_password.success_reset') + ' ' + data.email, {
                     position: 'bottom-right'
                 });
             }).catch(() => {
-                toast.error(`Что-то пошло не так или такого email не существует`, {
+                toast.error(t('reset_password.error_reset'), {
                     position: 'bottom-right'
                 });
             })
@@ -50,10 +50,10 @@ const ResetPassword = () => {
                     register={register} fieldList={authResetPasswordForm}
                     errors={errors}
                 >
-                    <AuthLink title="Вернуться" link="назад" href="/login" />
+                    <AuthLink title={t('reset_password.return_title')} link={t('reset_password.return_link')} href="/login" />
                     <div className="flex justify-center">
                         <div className="lg:w-7/12">
-                            <Button submit color="green">Сменить пароль</Button>
+                            <Button submit color="green">{t('reset_password.change_password_btn')}</Button>
                         </div>
                     </div>
                 </FormConstructor>

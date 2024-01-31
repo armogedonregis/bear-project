@@ -24,11 +24,11 @@ const Profile = () => {
     const sendForm: SubmitHandler<ICreateAgentProfile> = (data) => {
         createAgentProfile(data).unwrap()
             .then((res) => {
-                toast.success(`Вы успешно вошли`, {
+                toast.success(t('profile_page.confirm_create_profile'), {
                     position: 'bottom-right'
                 });
             }).catch(() => {
-                toast.error(`Неправильный email или пароль`, {
+                toast.error(t('profile_page.error_create_profile'), {
                     position: 'bottom-right'
                 });
             })
@@ -45,7 +45,7 @@ const Profile = () => {
                 >
                     <div className="flex justify-center">
                         <div className="w-5/12">
-                            <Button submit color="green">Создать профиль</Button>
+                            <Button submit color="green">{t('profile_page.btn_create_profile')}</Button>
                         </div>
                     </div>
                 </FormConstructor>
