@@ -42,7 +42,7 @@ export const Header = () => {
                             </Button>
                             <div className="mt-1">
                                 <Button color="gray">
-                                    {t('header.status')} {profile.roles.find(x => x === 'ADMIN') ? t('header.admin') : profile.roles.find(x => x === 'AGENT') ? t('header.agent') : t('header.client')}
+                                    {t('header.status')} {profile.roles.find(x => x === 'ADMIN') ? t('header.admin') : profile.typeUser === "Agent" ? t('header.agent') : t('header.client')}
                                 </Button>
                             </div>
                         </div>

@@ -233,5 +233,8 @@
         "logout_success": "Вы вышли из аккаунта",
         "btn_cancel": "Отменить",
         "btn_confirm": "Выйти"
+    },
+    "forms_app": {
+        
     }
 }
